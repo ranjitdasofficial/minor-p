@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post, Query, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { SwappingService } from './swapping.service';
 import { MinioService } from 'nestjs-minio-client';
 
 import * as fs from 'fs';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 
 @Controller('swapping')
@@ -40,7 +41,7 @@ export class SwappingController {
             if (err) {
               return console.log(err)
             }
-            this.minioService.client.putObject('test', '40mbfile.txt', stream, stats.size, function (err, objInfo) {
+            this.minioService.client.putObject('kiitconnect', '40mbfile.txt', stream, stats.size, function (err, objInfo) {
                 if (err) {
                   return console.log(err) // err should be null
                 }
@@ -61,5 +62,16 @@ export class SwappingController {
         //  stream.pipe(response);
         
     }
+
+
+    @Post("upload")
+    @UseInterceptors(FileInterceptor('file'))
+    async uploadFile(@UploadedFile() file: Express.Multer.File,  @Body() dto:any){
+        console.log(dto);
+
+        return true;
+
+    }
+        // return this.swappingService.uploadFile(dto); 
 }
 

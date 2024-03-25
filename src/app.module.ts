@@ -12,15 +12,18 @@ import { SwappingController } from './swapping/swapping.controller';
 import { SwappingModule } from './swapping/swapping.module';
 import { SwappingService } from './swapping/swapping.service';
 import { MinioModule } from 'nestjs-minio-client';
+import { MulterModule } from '@nestjs/platform-express';
 
 
 @Module({
   imports: [UserModule, AuthModule,ConfigModule.forRoot(), SwappingModule,MinioModule.register({
-    endPoint:"localhost",
-    port: 9000,
+    endPoint:"4.224.35.195",
+    port: 80,
     useSSL: false,
-    accessKey: "WC71QXxPeQr5zQDZPXxt",
-    secretKey: "GqTAaMViTgLZ3IK5iHULPTaxejeDQAQvcpZN9bdr",
+    accessKey: "vXzrmMY3S3JVRYAquzWk",
+    secretKey: "Xg6zGT3jGDSyGj05d7p42V7HQap4GWFli7EoC4Qo",
+  }),MulterModule.register({
+    dest: './uploads', // Set your upload directory
   })],
   controllers: [UserController,AuthController, SwappingController],
   providers: [AuthService,PrismaService,UserService,JwtService,SwappingService],
