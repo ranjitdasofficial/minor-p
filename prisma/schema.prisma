@@ -10,12 +10,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model User{
-
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  email String @unique
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  email    String @unique
   password String
+}
 
+// name:{type:String,required:true},
+// alloted:{type:Number,required:true},
+// email:{type:String,required:true},
+// lookingFor:{type:[],required:true},
+// matched:{type:Boolean,required:true},
+// contact:{type:String,required:true},
+// remoteUserId :{type:null||{} ,default:null},
+// editLeft:{type:Number,default:3}
+
+model Swapping {
+  id                 String     @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  branch             String
+  Semester           Int
+  alloted            Int
+  email              String     @unique
+  lookingFor         Int[]
+  matched            Boolean    @default(false)
+  contact            String
+  remoteUserId       String?     @db.ObjectId
+  remoteUser         Swapping?  @relation("SwappingToSwapping", fields: [remoteUserId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  editLeft           Int        @default(3)
+  createdAt          DateTime   @default(now())
+  SwappingToSwapping Swapping[] @relation("SwappingToSwapping")
 }
