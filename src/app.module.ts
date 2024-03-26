@@ -17,8 +17,8 @@ import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [UserModule, AuthModule,ConfigModule.forRoot(), SwappingModule,MinioModule.register({
-    endPoint:"4.224.35.195",
-    port: 80,
+    endPoint:"localhost",
+    port: 8000,
     useSSL: false,
     accessKey: "vXzrmMY3S3JVRYAquzWk",
     secretKey: "Xg6zGT3jGDSyGj05d7p42V7HQap4GWFli7EoC4Qo",
