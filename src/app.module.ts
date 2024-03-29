@@ -18,10 +18,10 @@ import { MulterModule } from '@nestjs/platform-express';
 @Module({
   imports: [UserModule, AuthModule,ConfigModule.forRoot(), SwappingModule,MinioModule.register({
     endPoint:"localhost",
-    port: 8000,
+    port: 9000,
     useSSL: false,
-    accessKey: "vXzrmMY3S3JVRYAquzWk",
-    secretKey: "Xg6zGT3jGDSyGj05d7p42V7HQap4GWFli7EoC4Qo",
+    accessKey: "e4vur0bvXKenxkgO4bVN",
+    secretKey: "f8NV77eMIQIkHNTN0JtYPwXJNSW525xdFuFIBZBW",
   }),MulterModule.register({
     dest: './uploads', // Set your upload directory
   })],

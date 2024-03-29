@@ -46,19 +46,19 @@ export class SwappingController {
   async getTest() {
     // const stream = fs.createReadStream('video.mp4');
     this.minioService.client.fPutObject(
-        'kiitconnect',
-        'vid35.mp4',
-        "./video3.mp4",
-        {
-            "Content-Type": "video/mp4",
-        },
-        function (err, objInfo) {
-          if (err) {
-            return console.log(err); // err should be null
-          }
-          console.log('Success', objInfo);
-        },
-      );
+      'kiitconnect',
+      'vid35.mp4',
+      './video3.mp4',
+      {
+        'Content-Type': 'video/mp4',
+      },
+      function (err, objInfo) {
+        if (err) {
+          return console.log(err); // err should be null
+        }
+        console.log('Success', objInfo);
+      },
+    );
     // var fileStat = fs.stat('video.mp4', (err, stats) => {
     //   if (err) {
     //     return console.log(err);
@@ -98,13 +98,20 @@ export class SwappingController {
     @UploadedFile() file: Express.Multer.File,
     @Body() dto: any,
   ) {
-    console.log(dto);
 
-    return true;
+
+    try {
+      console.log(file);
+      return await this.minioService.client.fPutObject(
+        'technicalranjit',
+        file.originalname,
+        file.path,
+      );
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
   // return this.swappingService.uploadFile(dto);
-
-
-  
 }

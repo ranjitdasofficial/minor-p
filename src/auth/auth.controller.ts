@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { RefreshGuard } from './guard/refresh.guard';
 
 
+
 @Controller('auth')
 export class AuthController {
     constructor(private readonly userService:UserService,private readonly AuthService:AuthService){
@@ -28,4 +29,6 @@ export class AuthController {
     async refreshToken(@Request() request){
       return this.AuthService.refreshToken(request.user);
     }
+
+    
 }
